@@ -42,19 +42,38 @@ exports.uploadAudio = async (req, res) => {
         botResponse = generateBotResponse(transcript);
       }
 
-      // Update session with all data
-      await Session.findByIdAndUpdate(savedSession._id, {
-        transcript: transcript,
-        botResponse: botResponse,
-        isUrgent: safetyResult.isUrgent,
-        safetyFlags: safetyResult.safetyFlags
-      });
+      // Update session
+      const updatedSession = await Session.findByIdAndUpdate(
+        savedSession._id,
+        {
+          transcript: transcript,
+          botResponse: botResponse,
+          isUrgent: safetyResult.isUrgent,
+          safetyFlags: safetyResult.safetyFlags
+        },
+        { new: true }
+      );
       
       console.log('Session updated:', {
         id: savedSession._id,
         urgent: safetyResult.isUrgent,
         flags: safetyResult.safetyFlags
       });
+
+      // Send real-time notification for urgent sessions
+      const io = req.app.get('io');
+      if (safetyResult.isUrgent) {
+        io.to('therapists').emit('urgent-session', {
+          sessionId: updatedSession._id,
+          patientId: updatedSession.patientId,
+          safetyFlags: safetyResult.safetyFlags,
+          timestamp: updatedSession.createdAt
+        });
+        console.log('Urgent notification sent to therapists');
+      }
+
+      // Send session update
+      io.to('therapists').emit('session-updated', updatedSession);
 
     } catch (error) {
       console.error('Async transcription error:', error);
@@ -70,7 +89,7 @@ exports.uploadAudio = async (req, res) => {
   }
 };
 
-// Keep existing generateBotResponse function...
+// Keep existing functions...
 const generateBotResponse = (transcript) => {
   const lowerText = transcript.toLowerCase();
   
