@@ -95,3 +95,39 @@ button:hover {
   background-color: #17a2b8;
   margin-bottom: 15px;
 }
+
+.notifications {
+  margin-bottom: 20px;
+}
+
+.notification {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  margin: 5px 0;
+  border-radius: 5px;
+  background-color: #f8d7da;
+  border: 1px solid #f5c6cb;
+  color: #721c24;
+}
+
+.notification.urgent {
+  background-color: #ff6b6b;
+  color: white;
+  font-weight: bold;
+}
+
+.urgent-session {
+  border: 2px solid #ff4757 !important;
+  background-color: #ffe3e3 !important;
+}
+
+.notification button {
+  background: transparent;
+  border: none;
+  color: inherit;
+  font-size: 18px;
+  cursor: pointer;
+  padding: 0 5px;
+}
