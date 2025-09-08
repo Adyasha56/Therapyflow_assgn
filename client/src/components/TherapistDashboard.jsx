@@ -11,7 +11,11 @@ const TherapistDashboard = () => {
     fetchSessions();
     
     // Socket connection
-    const socket = io(import.meta.env.VITE_WS_URL);
+    // const socket = io(import.meta.env.VITE_WS_URL);
+    const socket = io(import.meta.env.VITE_WS_URL, {
+    transports: ['websocket'],   // force websocket connection
+    withCredentials: true        // if backend has CORS
+  });
 
     
     socket.emit('join-therapist');
