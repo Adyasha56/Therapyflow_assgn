@@ -45,7 +45,7 @@ io.on('connection', (socket) => {
 });
 
 // Routes
-app.get('/api/test', (req, res) => {
+app.get('/', (req, res) => {
   res.json({ message: 'Server working!' });
 });
 
