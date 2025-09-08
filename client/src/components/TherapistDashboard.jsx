@@ -11,7 +11,7 @@ const TherapistDashboard = () => {
     fetchSessions();
     
     // Socket connection
-    const socket = io(import.meta.env.VITE_API_URL);
+    const socket = io(import.meta.env.VITE_WS_URL);
 
     
     socket.emit('join-therapist');
