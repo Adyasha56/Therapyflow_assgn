@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-
+const API_URL = import.meta.env.VITE_API_URL;
 const AudioRecorder = () => {
   const [isRecording, setIsRecording] = useState(false);
   const [audioBlob, setAudioBlob] = useState(null);
@@ -55,7 +55,7 @@ const AudioRecorder = () => {
     formData.append('audio', audioBlob, 'recording.wav');
 
     try {
-      const response = await fetch('http://localhost:5000/api/upload-audio', {
+      const response = await fetch(`${API_URL}/api/upload-audio`, {
         method: 'POST',
         body: formData,
       });

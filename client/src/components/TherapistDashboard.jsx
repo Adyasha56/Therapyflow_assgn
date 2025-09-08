@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import io from 'socket.io-client';
 
+const API_URL = import.meta.env.VITE_API_URL;
 const TherapistDashboard = () => {
   const [sessions, setSessions] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -10,7 +11,7 @@ const TherapistDashboard = () => {
     fetchSessions();
     
     // Socket connection
-    const socket = io('http://localhost:5000');
+    const socket = io(API_URL);
     
     socket.emit('join-therapist');
     
@@ -38,7 +39,7 @@ const TherapistDashboard = () => {
 
   const fetchSessions = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/sessions');
+      const response = await fetch(`${API_URL}/api/sessions`);
       const data = await response.json();
       setSessions(data);
       setLoading(false);
