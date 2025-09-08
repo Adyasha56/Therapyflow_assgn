@@ -78,7 +78,6 @@ ASSEMBLY_AI_API_KEY=your_assemblyai_key
 NODE_ENV=development
 PORT=5000
 MONGODB_URI=mongodb://admin:password123@mongodb:27017/therapyflow?authSource=admin
-JWT_SECRET=your-secret-key-here
 ```
 
 ## 🧪 Running Tests
