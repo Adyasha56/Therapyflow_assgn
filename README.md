@@ -58,20 +58,12 @@ docker-compose up -d --build
 ## 🏗️ Architecture
 
 ```
-├── client/                 # React frontend
-│   ├── src/
-│   │   ├── components/     # UI components
-│   │   ├── services/       # API calls
-│   │   └── utils/          # Utilities
-│   └── Dockerfile
-├── server/                 # Express backend
-│   ├── controllers/        # Route handlers
-│   ├── models/            # MongoDB models
-│   ├── routes/            # API routes
-│   ├── services/          # Business logic
-│   └── Dockerfile
+therapyflow/
+├── client/          (React frontend)
+├── server/          (Express backend)
 ├── docker-compose.yml
-└── README.md
+├── README.md
+└── .env.example
 ```
 
 ## 🔧 Environment Variables
